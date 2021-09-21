@@ -1,18 +1,24 @@
-const express = require('express'),
-const  http = require('http');
+const express = require("express"),
+  http = require("http");
 // const bodyParser = require("body-parser");
 
-const hostname = 'localhost';
+const hostname = "localhost";
 const port = 3000;
-const morgan = require('morgan');
+const morgan = require("morgan");
 
 const app = express();
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 
-const dishRouter = require('./routes/dishRouter');
-app.use('/dishes', dishRouter);
+const dishRouter = require("./routes/dishRouter");
+app.use("/dishes", dishRouter);
 
-app.use(express.static(__dirname + '/public')); //serve up  the static files
+const promoRouter = require("./routes/promoRouter");
+app.use("/promotions", promoRouter);
+
+const leaderRouter = require("./routes/leaderRouter");
+app.use("/leaders", leaderRouter);
+
+app.use(express.static(__dirname + "/public")); //serve up  the static files
 // app.use(bodyParser.json());
 
 // app.all('/dishes', (req,res,next) => {
@@ -33,7 +39,7 @@ app.use(express.static(__dirname + '/public')); //serve up  the static files
 //   res.statusCode = 403;
 //   res.end('PUT operation not supported on /dishes');
 // });
- 
+
 // app.delete('/dishes', (req, res, next) => {
 //     res.end('Deleting all dishes');
 // });
@@ -49,7 +55,7 @@ app.use(express.static(__dirname + '/public')); //serve up  the static files
 
 // app.put('/dishes/:dishId', (req, res, next) => {
 //   res.write('Updating the dish: ' + req.params.dishId + '\n');
-//   res.end('Will update the dish: ' + req.body.name + 
+//   res.end('Will update the dish: ' + req.body.name +
 //         ' with details: ' + req.body.description);
 // });
 
