@@ -5,17 +5,15 @@ const express = require("express"),
 const hostname = "localhost";
 const port = 3000;
 const morgan = require("morgan");
+const dishRouter = require("./routes/dishRouter");
+const promoRouter = require("./routes/promoRouter");
+const leaderRouter = require("./routes/leaderRouter");
 
 const app = express();
 app.use(morgan("dev"));
 
-const dishRouter = require("./routes/dishRouter");
 app.use("/dishes", dishRouter);
-
-const promoRouter = require("./routes/promoRouter");
 app.use("/promotions", promoRouter);
-
-const leaderRouter = require("./routes/leaderRouter");
 app.use("/leaders", leaderRouter);
 
 app.use(express.static(__dirname + "/public")); //serve up  the static files
